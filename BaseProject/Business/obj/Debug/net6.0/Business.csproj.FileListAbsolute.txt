@@ -13,3 +13,5 @@ C:\Users\msyil\Documents\GitHub\MyProjects\BaseProject\Business\obj\Debug\net6.0
 C:\Users\msyil\Documents\GitHub\MyProjects\BaseProject\Business\obj\Debug\net6.0\refint\Business.dll
 C:\Users\msyil\Documents\GitHub\MyProjects\BaseProject\Business\obj\Debug\net6.0\Business.pdb
 C:\Users\msyil\Documents\GitHub\MyProjects\BaseProject\Business\obj\Debug\net6.0\ref\Business.dll
+C:\Users\msyil\Documents\GitHub\MyProjects\BaseProject\Business\bin\Debug\net6.0\DataAccess.dll
+C:\Users\msyil\Documents\GitHub\MyProjects\BaseProject\Business\bin\Debug\net6.0\DataAccess.pdb
