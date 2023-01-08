@@ -10,7 +10,7 @@ namespace API.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private IUserService userService;
+        private readonly IUserService userService;
 
         public UsersController(IUserService userService)
         {
@@ -18,30 +18,46 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public List<User> GetUsers()
+        public IActionResult GetUsers()
         {
-            return userService.GetUsers();
+            var users = userService.GetUsers();
+            return Ok(users);
         }
 
         [HttpGet("{id}")]
-        public User GetUser(int id)
+        public IActionResult GetUser(int id)
         {
-            return userService.GetUserById(id);
+            var user = userService.GetUserById(id);
+            if (user != null)
+            {
+                return Ok(user);
+            }
+            return NotFound();
         }
         [HttpPost]
-        public User PostUser(User user)
+        public IActionResult PostUser(User user)
         {
-            return userService.CreateUser(user);
+            var createUser = userService.CreateUser(user);
+            return CreatedAtAction("Get", new { id = user.Id }, createUser);
         }
         [HttpPut]
-        public User putUser(User user)
+        public IActionResult PutUser(User user)
         {
-            return userService.UpdateUser(user);
+            if (userService.GetUserById(user.Id) != null)
+            {
+                return Ok(userService.UpdateUser(user));
+            }
+            return NotFound();
         }
         [HttpDelete("{id}")]
-        public void DeleteUser(int id)
+        public IActionResult DeleteUser(int id)
         {
-            userService.DeleteUser(id);
+            if (userService.GetUserById(id) != null)
+            {
+                userService.DeleteUser(id);
+                return Ok();
+            }
+            return NotFound();
         }
     }
 }
