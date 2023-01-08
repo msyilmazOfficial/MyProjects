@@ -30,12 +30,6 @@
             "projectReferences": {
               "C:\\Users\\msyil\\Documents\\GitHub\\MyProjects\\BaseProject\\Business\\Business.csproj": {
                 "projectPath": "C:\\Users\\msyil\\Documents\\GitHub\\MyProjects\\BaseProject\\Business\\Business.csproj"
-              },
-              "C:\\Users\\msyil\\Documents\\GitHub\\MyProjects\\BaseProject\\DataAccess\\DataAccess.csproj": {
-                "projectPath": "C:\\Users\\msyil\\Documents\\GitHub\\MyProjects\\BaseProject\\DataAccess\\DataAccess.csproj"
-              },
-              "C:\\Users\\msyil\\Documents\\GitHub\\MyProjects\\BaseProject\\Entities\\Entities.csproj": {
-                "projectPath": "C:\\Users\\msyil\\Documents\\GitHub\\MyProjects\\BaseProject\\Entities\\Entities.csproj"
               }
             }
           }
@@ -49,6 +43,12 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.2.3, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
