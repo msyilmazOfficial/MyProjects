@@ -12,9 +12,9 @@ namespace API.Controllers
     {
         private IUserService userService;
 
-        public UsersController()
+        public UsersController(IUserService userService)
         {
-            userService = new UserManager();
+            this.userService = userService;
         }
 
         [HttpGet]
