@@ -6,7 +6,7 @@ using Business.Concrete;
 
 namespace API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
     {
@@ -18,7 +18,8 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public List<User> get()
+        [Route("[controller]/get")]
+        public List<User> Get()
         {
             return userService.GetUsers();
         }
