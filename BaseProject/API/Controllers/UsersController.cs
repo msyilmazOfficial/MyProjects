@@ -18,16 +18,29 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetUsers()
+        [Route("[action]")]
+        public async Task<IActionResult> GetUsers()
         {
-            var users = userService.GetUsers();
+            var users = await userService.GetUsers();
             return Ok(users);
         }
 
-        [HttpGet("{id}")]
-        public IActionResult GetUser(int id)
+        [HttpGet]
+        [Route("[action]/{id}")]
+        public async Task<IActionResult> GetUserById(int id)
         {
-            var user = userService.GetUserById(id);
+            var user = await userService.GetUserById(id);
+            if (user != null)
+            {
+                return Ok(user);
+            }
+            return NotFound();
+        }
+        [HttpGet]
+        [Route("[action]/{userName}")]
+        public async Task<IActionResult> GetUserByUserName(string userName)
+        {
+            var user = await userService.GetUserByUserName(userName);
             if (user != null)
             {
                 return Ok(user);
@@ -35,26 +48,29 @@ namespace API.Controllers
             return NotFound();
         }
         [HttpPost]
-        public IActionResult PostUser(User user)
+        [Route("[action]")]
+        public async Task<IActionResult> CreateUser(User user)
         {
-            var createUser = userService.CreateUser(user);
+            var createUser = await userService.CreateUser(user);
             return CreatedAtAction("Get", new { id = user.Id }, createUser);
         }
         [HttpPut]
-        public IActionResult PutUser(User user)
+        [Route("[action]")]
+        public async Task<IActionResult> UpdateUser(User user)
         {
             if (userService.GetUserById(user.Id) != null)
             {
-                return Ok(userService.UpdateUser(user));
+                return Ok(await userService.UpdateUser(user));
             }
             return NotFound();
         }
-        [HttpDelete("{id}")]
-        public IActionResult DeleteUser(int id)
+        [HttpDelete]
+        [Route("[action]/{id}")]
+        public async Task<IActionResult> DeleteUser(int id)
         {
-            if (userService.GetUserById(id) != null)
+            if (await userService.GetUserById(id) != null)
             {
-                userService.DeleteUser(id);
+                await userService.DeleteUser(id);
                 return Ok();
             }
             return NotFound();

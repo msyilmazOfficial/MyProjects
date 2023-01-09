@@ -1,5 +1,6 @@
 ﻿using DataAccess.Abstract;
 using Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,48 +11,56 @@ namespace DataAccess.Concrete
 {
     public class UserRepository : IUserRepository
     {
-        public User CreateUser(User user)
+        public async Task<User> CreateUser(User user)
         {
             using (DbContex dbContex = new DbContex())
             {
                 dbContex.Users.Add(user);
-                dbContex.SaveChanges();
+                await dbContex.SaveChangesAsync();
                 return user;
             }
         }
 
-        public void DeleteUser(int id)
+        public async Task DeleteUser(int id)
         {
             using (DbContex dbContex = new DbContex())
             {
-                User user = GetUserById(id);
+                User user = await GetUserById(id);
                 dbContex.Users.Remove(user);
-                dbContex.SaveChanges();
+                await dbContex.SaveChangesAsync();
             }
         }
 
-        public User GetUserById(int id)
+        public async Task<User> GetUserById(int id)
         {
             using (DbContex dbContex = new DbContex())
             {
-                return dbContex.Users.Find(id);
+                return await dbContex.Users.FindAsync(id);
             }
         }
 
-        public List<User> GetUsers()
+        public async Task<User> GetUserByUserName(string userName)
         {
             using (DbContex dbContex = new DbContex())
             {
-                return dbContex.Users.ToList();
+                return await dbContex.Users.FirstOrDefaultAsync(x => x.UserName.ToLower() == userName.ToLower());
             }
         }
 
-        public User UpdateUser(User user)
+        public async Task<List<User>> GetUsers()
+        {
+            using (DbContex dbContex = new DbContex())
+            {
+                return await dbContex.Users.ToListAsync();
+            }
+        }
+
+        public async Task<User> UpdateUser(User user)
         {
             using (DbContex dbContex = new DbContex())
             {
                 dbContex.Users.Update(user);
-                dbContex.SaveChanges();
+                await dbContex.SaveChangesAsync();
                 return user;
             }
         }

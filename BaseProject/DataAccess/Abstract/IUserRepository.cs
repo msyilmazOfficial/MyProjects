@@ -9,14 +9,16 @@ namespace DataAccess.Abstract
 {
     public interface IUserRepository
     {
-        List<User> GetUsers();
+        Task<List<User>> GetUsers();
 
-        User GetUserById(int id);
+        Task<User> GetUserById(int id);
 
-        User CreateUser(User user);
+        Task<User> GetUserByUserName(string userName);
 
-        User UpdateUser(User user);
+        Task<User> CreateUser(User user);
 
-        void DeleteUser(int id);
+        Task<User> UpdateUser(User user);
+
+        Task DeleteUser(int id);
     }
 }

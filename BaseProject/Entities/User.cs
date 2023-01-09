@@ -10,22 +10,23 @@ namespace Entities
 
         [Required]
         [StringLength(50)]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string Surname { get; set; }
+        public string? Surname { get; set; }
 
+        [Required]
         [StringLength(50)]
-        public string UserName { get; set; }
+        public string? UserName { get; set; }
 
         [Required]
         [StringLength(200)]
-        public string Password { get; set; }
+        public string? Password { get; set; }
 
         [Required]
         [StringLength(100)]
-        public string Email { get; set; }
+        public string? Email { get; set; }
 
         public DateTime BirthDate { get; set; }
 

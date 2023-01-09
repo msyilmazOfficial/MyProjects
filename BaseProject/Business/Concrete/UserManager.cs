@@ -19,29 +19,34 @@ namespace Business.Concrete
             _userRepository = userRepository;
         }
 
-        public User CreateUser(User user)
+        public async Task<User> CreateUser(User user)
         {
-            return _userRepository.CreateUser(user);
+            return await _userRepository.CreateUser(user);
         }
 
-        public void DeleteUser(int id)
+        public async Task DeleteUser(int id)
         {
-            _userRepository.DeleteUser(id);
+            await _userRepository.DeleteUser(id);
         }
 
-        public User GetUserById(int id)
+        public async Task<User> GetUserById(int id)
         {
-            return _userRepository.GetUserById(id);
+            return await _userRepository.GetUserById(id);
         }
 
-        public List<User> GetUsers()
+        public async Task<User> GetUserByUserName(string userName)
         {
-            return _userRepository.GetUsers();
+            return await _userRepository.GetUserByUserName(userName);
         }
 
-        public User UpdateUser(User user)
+        public async Task<List<User>> GetUsers()
         {
-            return _userRepository.UpdateUser(user);
+            return await _userRepository.GetUsers();
+        }
+
+        public async Task<User> UpdateUser(User user)
+        {
+            return await _userRepository.UpdateUser(user);
         }
     }
 }
