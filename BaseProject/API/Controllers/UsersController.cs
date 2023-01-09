@@ -36,6 +36,7 @@ namespace API.Controllers
             }
             return NotFound();
         }
+        
         [HttpGet]
         [Route("[action]/{userName}")]
         public async Task<IActionResult> GetUserByUserName(string userName)
@@ -47,6 +48,7 @@ namespace API.Controllers
             }
             return NotFound();
         }
+        
         [HttpPost]
         [Route("[action]")]
         public async Task<IActionResult> CreateUser(User user)
@@ -54,6 +56,7 @@ namespace API.Controllers
             var createUser = await userService.CreateUser(user);
             return CreatedAtAction("Get", new { id = user.Id }, createUser);
         }
+        
         [HttpPut]
         [Route("[action]")]
         public async Task<IActionResult> UpdateUser(User user)
@@ -64,6 +67,7 @@ namespace API.Controllers
             }
             return NotFound();
         }
+        
         [HttpDelete]
         [Route("[action]/{id}")]
         public async Task<IActionResult> DeleteUser(int id)
