@@ -1,15 +1,19 @@
 ﻿using Business.Abstract;
 using Business.Concrete;
 using Entities;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace API.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
+    //[Authorize(Roles ="admin")]
     public class UsersController : ControllerBase
     {
         private readonly IUserService userService;
@@ -38,7 +42,7 @@ namespace API.Controllers
             }
             return NotFound();
         }
-        
+
         [HttpGet]
         [Route("[action]/{userName}")]
         public async Task<IActionResult> GetUserByUserName(string userName)
@@ -50,15 +54,16 @@ namespace API.Controllers
             }
             return NotFound();
         }
-        
+
+        [AllowAnonymous]
         [HttpPost]
         [Route("[action]")]
         public async Task<IActionResult> CreateUser(User user)
         {
             var createUser = await userService.CreateUser(user);
-            return CreatedAtAction("Get", new { id = user.Id }, createUser);
+            return CreatedAtAction("GetUserById", new { id = user.Id }, createUser);
         }
-        
+
         [HttpPut]
         [Route("[action]")]
         public async Task<IActionResult> UpdateUser(User user)
@@ -69,7 +74,7 @@ namespace API.Controllers
             }
             return NotFound();
         }
-        
+
         [HttpDelete]
         [Route("[action]/{id}")]
         public async Task<IActionResult> DeleteUser(int id)
@@ -78,6 +83,36 @@ namespace API.Controllers
             {
                 await userService.DeleteUser(id);
                 return Ok();
+            }
+            return NotFound();
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("[action]/{userName}/{password}")]
+        public async Task<IActionResult> Authenticate(string userName, string password)
+        {
+            var user = await userService.GetUserByUserName(userName);
+            if (user != null)
+            {
+                if (user.Password == password)
+                {
+                    var claim = new List<Claim>
+                    {
+                        new Claim(ClaimTypes.NameIdentifier,user.UserName),
+                        new Claim(ClaimTypes.Role,user.Role.ToString()),
+
+                    };
+
+                    ClaimsIdentity claimsIdentity = new ClaimsIdentity(claim, CookieAuthenticationDefaults.AuthenticationScheme);
+                    AuthenticationProperties authProperties = new AuthenticationProperties() { AllowRefresh = true };
+
+                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
+                    return Ok();
+
+                    //return user;
+                }
+                return NotFound();
             }
             return NotFound();
         }

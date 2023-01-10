@@ -32,5 +32,8 @@ namespace Entities
 
         [StringLength(50)]
         public string? Phone { get; set; }
+
+        [Required]
+        public int Role { get; set; }
     }
 }
