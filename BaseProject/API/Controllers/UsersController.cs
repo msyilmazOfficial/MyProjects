@@ -60,7 +60,7 @@ namespace API.Controllers
         [Route("[action]")]
         public async Task<IActionResult> CreateUser(User user)
         {
-            var checkUser= await userService.GetUserByUserName(user.UserName);
+            var checkUser= await userService.GetUserByUserName(user.UserName != null ? user.UserName : "");
             if (checkUser != null)
             {
                 return BadRequest();
