@@ -7,3 +7,4 @@
 *.v5.2
 *.csproj
 /BaseProject/Entities/obj/Debug/net6.0/Entities.csproj.CoreCompileInputs.cache
+/BaseProject/DataAccess/obj/Debug/net6.0/DataAccess.csproj.CoreCompileInputs.cache
