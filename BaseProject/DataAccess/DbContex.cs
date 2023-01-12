@@ -17,5 +17,14 @@ namespace DataAccess
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Currency> Currency { get; set; }
+        public DbSet<Customer> Customer { get; set; }
+        public DbSet<CustomerOperation> CustomerOperation { get; set; }
+        public DbSet<Order> Order { get; set; }
+        public DbSet<PriceList> PriceList { get; set; }
+        public DbSet<Stock> Stock { get; set; }
+        public DbSet<StocOperation> StocOperation { get; set; }
+        public DbSet<Unit> Unit { get; set; }
+        public DbSet<WareHouse> WareHouse { get; set; }
     }
 }

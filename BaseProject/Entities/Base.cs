@@ -10,9 +10,6 @@ namespace Entities
 {
     public abstract class Base
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-
         [Required]
         public int CreateUser { get; set; }
 
