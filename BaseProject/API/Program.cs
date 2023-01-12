@@ -19,7 +19,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 {
     options.Cookie.Name = "NetCookieAuthentication";
     options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
-    options.LoginPath = "";
+    //options.LoginPath = "";
     options.AccessDeniedPath = "";
 });
 
