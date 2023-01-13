@@ -60,7 +60,7 @@ namespace API.Controllers
         [Route("[action]")]
         public async Task<IActionResult> CreateUser(User user)
         {
-            var checkUser= await userService.GetUserByUserName(user.UserName != null ? user.UserName : "");
+            var checkUser= await userService.GetUserByUserName(user.UserName ?? "");
             if (checkUser != null)
             {
                 return BadRequest();
@@ -104,12 +104,12 @@ namespace API.Controllers
                 {
                     var claim = new List<Claim>
                     {
-                        new Claim(ClaimTypes.NameIdentifier,user.UserName!=null ? user.UserName:""),
+                        new Claim(ClaimTypes.NameIdentifier,user.UserName ?? ""),
                         new Claim(ClaimTypes.Role,user.Role.ToString()),
                     };
 
-                    ClaimsIdentity claimsIdentity = new ClaimsIdentity(claim, CookieAuthenticationDefaults.AuthenticationScheme);
-                    AuthenticationProperties authProperties = new AuthenticationProperties() { AllowRefresh = true };
+                    ClaimsIdentity claimsIdentity = new(claim, CookieAuthenticationDefaults.AuthenticationScheme);
+                    AuthenticationProperties authProperties = new() { AllowRefresh = true };
 
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
                     return Ok();
