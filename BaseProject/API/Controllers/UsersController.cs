@@ -106,7 +106,6 @@ namespace API.Controllers
                     {
                         new Claim(ClaimTypes.NameIdentifier,user.UserName!=null ? user.UserName:""),
                         new Claim(ClaimTypes.Role,user.Role.ToString()),
-
                     };
 
                     ClaimsIdentity claimsIdentity = new ClaimsIdentity(claim, CookieAuthenticationDefaults.AuthenticationScheme);

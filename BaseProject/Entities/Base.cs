@@ -14,13 +14,13 @@ namespace Entities
         public int CreateUser { get; set; }
 
         [Required]
-        public DateTime CreateDate { get; set; }
+        public DateTime CreateDate { get; set; } = DateTime.Now;
 
         [Required]
         public int LastUpdateUser { get; set; }
 
         [Required]
-        public DateTime LastUpdateDate { get; set; }
+        public DateTime LastUpdateDate { get; set; } = DateTime.Now;
 
         [Required]
         public int IsHidden { get; set; }
