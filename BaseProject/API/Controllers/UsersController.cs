@@ -60,7 +60,7 @@ namespace API.Controllers
         [Route("[action]")]
         public async Task<IActionResult> CreateUser(User user)
         {
-            var checkUser= await userService.GetUserByUserName(user.UserName ?? "");
+            var checkUser= await userService.GetUserByUserName(user.UserName ?? String.Empty);
             if (checkUser != null)
             {
                 return BadRequest();
@@ -104,7 +104,7 @@ namespace API.Controllers
                 {
                     var claim = new List<Claim>
                     {
-                        new Claim(ClaimTypes.NameIdentifier,user.UserName ?? ""),
+                        new Claim(ClaimTypes.NameIdentifier,user.UserName ?? String.Empty),
                         new Claim(ClaimTypes.Role,user.Role.ToString()),
                     };
 
