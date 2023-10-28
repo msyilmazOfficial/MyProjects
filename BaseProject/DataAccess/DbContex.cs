@@ -13,7 +13,7 @@ namespace DataAccess
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseSqlServer("Server=DESKTOP-JTHUOM0\\MSSQLSERVER1; Database=MY_PROJECT; Integrated Security=True;");
+            optionsBuilder.UseSqlServer("Server=DESKTOP-JBRKIJL\\SQLEXPRESS; Database=MY_PROJECT; Integrated Security=True;");
         }
 
         public DbSet<User>? Users { get; set; }
