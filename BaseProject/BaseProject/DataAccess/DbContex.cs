@@ -26,5 +26,7 @@ namespace DataAccess
         public DbSet<StocOperation>? StocOperation { get; set; }
         public DbSet<Unit>? Unit { get; set; }
         public DbSet<WareHouse>? WareHouse { get; set; }
+        public DbSet<Service>? Service { get; set; }
+        public DbSet<ServiceOperation>? ServiceOperation { get; set; }
     }
 }
